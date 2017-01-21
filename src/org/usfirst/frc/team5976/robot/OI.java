@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5976.robot;
 
+import edu.wpi.first.wpilibj.XboxController;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -32,4 +34,10 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
+	
+	private final XboxController DRIVE_CONTROLLER = new XboxController(0);
+	
+	public XboxController getDriveController() {
+		return DRIVE_CONTROLLER;
+	}
 }

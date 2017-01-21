@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5976.robot.commands;
 
+import org.usfirst.frc.team5976.robot.RobotMap;
 import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
 import com.ctre.CANTalon;
@@ -18,20 +19,16 @@ public class DriveStraight extends Command{
 	private final int DIAMETER = 6;
 	private final int REQUIRED_NUMBER_WITHIN_ERROR = 20;
 	
-	public DriveStraight(double revolutions, DriveTrain driveTrain) {
+	public DriveStraight(double inches, DriveTrain driveTrain) {
 		this.driveTrain = driveTrain;
 		leftMaster = driveTrain.getLeftMaster();
 		rightMaster = driveTrain.getRightMaster();
-		this.revolutions = revolutions;
+		revolutions = toRevolutions(inches);
 		requires(driveTrain);
 	}
 	
-	public DriveStraight(int distance, DriveTrain driveTrain) {
-		this.driveTrain = driveTrain;
-		leftMaster = driveTrain.getLeftMaster();
-		rightMaster = driveTrain.getRightMaster();
-		revolutions = distance / (DIAMETER * Math.PI);
-		requires(driveTrain);
+	protected double toRevolutions(double inches){
+		return inches / (Math.PI * DIAMETER);
 	}
 	
 	protected void initialize() {
@@ -57,7 +54,7 @@ public class DriveStraight extends Command{
 	@Override
 	protected boolean isFinished() {
 		double currentError = (leftMaster.getError() + rightMaster.getError()) / 2;
-		if (Math.abs(currentError) < driveTrain.getAllowableError() && previousError == currentError) {
+		if (Math.abs(currentError) < RobotMap.ALLOWABLE_ERROR && previousError == currentError) {
 			countWithinError++;
 			if (countWithinError >= REQUIRED_NUMBER_WITHIN_ERROR) return true;
 		}

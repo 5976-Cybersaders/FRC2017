@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team5976.robot.commands.DriveStraight;
+import org.usfirst.frc.team5976.robot.commands.MultiMoveCommand;
 import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
 /**
@@ -47,7 +48,7 @@ public class Robot extends IterativeRobot {
 		
 		//Subsystems
 		oi = new OI();
-		driveTrain = new DriveTrain();
+		driveTrain = new DriveTrain(oi);
 		System.out.println("END INIT SUBSYSTEMS");
 		
 		chooser = makeChooser();
@@ -56,7 +57,7 @@ public class Robot extends IterativeRobot {
 	
 	public SendableChooser<Command> makeChooser() {
 		SendableChooser<Command> chooser = new SendableChooser<>();
-		chooser.addDefault("Default: Drive Straight 2 Revs", new DriveStraight(2, driveTrain));
+		chooser.addDefault("Default: Drive Straight 2 Revs", new MultiMoveCommand(driveTrain));
 		SmartDashboard.putData("CMH Autonomous Command", chooser);
 		System.out.println("END INIT CHOOSER");
 		return chooser;
@@ -91,6 +92,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		System.out.println("START AUTO INIT");
+		driveTrain.updateDefaultCommandForNonTeleOp();
 		autonomousCommand = chooser.getSelected();
 
 		/*
@@ -101,6 +103,7 @@ public class Robot extends IterativeRobot {
 		 */
 
 		// schedule the autonomous command (example)
+		
 		if (autonomousCommand != null) {
 			System.out.println("START " + autonomousCommand.getName());
 			autonomousCommand.start();
@@ -125,6 +128,7 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		driveTrain.updateDefaultCommandForTeleOp();
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}
