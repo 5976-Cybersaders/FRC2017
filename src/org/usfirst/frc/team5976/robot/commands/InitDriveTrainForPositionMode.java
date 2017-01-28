@@ -14,45 +14,44 @@ public class InitDriveTrainForPositionMode extends InitDriveTrain {
 	@Override
 	protected void initTalons() {
 		// Setup Talons for use
-		leftMaster.setControlMode(CANTalon.TalonControlMode.Position.value);
-		leftMaster.set(0);
-		leftMaster.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-		leftMaster.configEncoderCodesPerRev(360);
-		leftMaster.setPosition(0);
-		// lefMaster.setVoltageRampRate(RAMP_RATE);
-		// Profile 0
-		leftMaster.setProfile(0);
-		leftMaster.configNominalOutputVoltage(+0.0f, -0.0f);
-		leftMaster.configPeakOutputVoltage(+RobotMap.PEAK_VOLTAGE, -RobotMap.PEAK_VOLTAGE);
-		leftMaster.setAllowableClosedLoopErr(RobotMap.ALLOWABLE_ERROR);
-		leftMaster.setPID(RobotMap.kP, RobotMap.kI, RobotMap.kD);
-		leftMaster.enableControl();
+		initMaster(leftMaster);
 		System.out.println("END INIT left master");
-
-		leftSlave.setControlMode(CANTalon.TalonControlMode.Follower.value);
-		leftSlave.set(leftMaster.getDeviceID()); // Set the deviceID to follow
-													// drive outputs
+		
+		initSlave(leftSlave, leftMaster.getDeviceID());
 		System.out.println("END INIT left slave");
 
-		rightMaster.setControlMode(CANTalon.TalonControlMode.Position.value);
-		rightMaster.set(0);
-		rightMaster.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-		rightMaster.configEncoderCodesPerRev(360);
-		rightMaster.setPosition(0);
-		// lefMaster.setVoltageRampRate(RAMP_RATE);
-		// Profile 0
-		rightMaster.setProfile(0);
-		rightMaster.configNominalOutputVoltage(+0.0f, -0.0f);
-		rightMaster.configPeakOutputVoltage(+RobotMap.PEAK_VOLTAGE, -RobotMap.PEAK_VOLTAGE);
-		rightMaster.setAllowableClosedLoopErr(RobotMap.ALLOWABLE_ERROR);
-		rightMaster.setPID(RobotMap.kP, RobotMap.kI, RobotMap.kD);
-		rightMaster.enableControl();
+		initMaster(rightMaster);
 		System.out.println("END INIT right master");
-
-		rightSlave.setControlMode(CANTalon.TalonControlMode.Follower.value);
-		rightSlave.set(leftMaster.getDeviceID());
+		
+		initSlave(rightSlave, rightMaster.getDeviceID());
 		System.out.println("END INIT right slave");
 	}
-
 	
+	protected void initCommon(CANTalon talon) {
+		super.initCommon(talon);
+		talon.configNominalOutputVoltage(+0.0f, -0.0f);
+		talon.setVoltageRampRate(RobotMap.RAMP_RATE);
+		talon.enableBrakeMode(RobotMap.BRAKE_MODE);
+		talon.setAllowableClosedLoopErr(RobotMap.ALLOWABLE_ERROR);
+		talon.setPID(RobotMap.kP, RobotMap.kI, RobotMap.kD);
+		talon.enableControl();
+	}
+	
+	protected void initMaster(CANTalon talon) {
+		super.initMaster(talon);
+		talon.setControlMode(CANTalon.TalonControlMode.Position.value);
+		talon.set(0);
+		talon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		talon.configEncoderCodesPerRev(360);
+		talon.setPosition(0);
+		initCommon(talon);
+	}
+	
+	protected void initSlave(CANTalon talon, int masterID) {
+		super.initSlave(talon, masterID);
+	}
+	
+	protected double getMaxVoltage() {
+		return RobotMap.PEAK_VOLTAGE;
+	}
 }

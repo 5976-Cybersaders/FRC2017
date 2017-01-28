@@ -43,12 +43,39 @@ public class DriveStraight extends Command{
 		rightMaster.set(revolutions);
 		countWithinError = 0;
 		previousError = 1000000;
+		
+		report(driveTrain.getLeftMaster());
+		report(driveTrain.getLeftSlave());
+		report(driveTrain.getRightMaster());
+		report(driveTrain.getRightSlave());
+	}
+	
+	public void report(CANTalon talon) {
 		System.out.println("INIT " + this);
+		System.out.println("Control Mode: " + talon.getControlMode());
+		System.out.println("Device ID" + talon.getDeviceID());
+		System.out.println("Closed Loop Ramp Rate" + talon.getCloseLoopRampRate());
+		System.out.println("P " + talon.getP());
+		System.out.println("I " + talon.getI());
+		System.out.println("D " + talon.getD());
+		System.out.println("Source Type " + talon.getPIDSourceType());
+		System.out.println();
+		System.out.println();
 	}
 	
 	protected void execute() {
 		SmartDashboard.putNumber("Left Revolutions", leftMaster.getPosition());
 		SmartDashboard.putNumber("Right Revolutions", rightMaster.getPosition());
+		reportExecute(leftMaster, "Left");
+		reportExecute(rightMaster, "Right");
+	}
+	
+	public void reportExecute(CANTalon talon, String side) {
+		System.out.println(side + " Set: " + talon.getSetpoint() + 
+				" CE: " + talon.getClosedLoopError() +
+				" Enc Pos: " + talon.getEncPosition() + 
+				" Revs: " + talon.getPosition() + 
+				" Count: " + countWithinError);
 	}
 	
 	@Override

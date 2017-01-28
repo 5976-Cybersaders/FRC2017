@@ -37,6 +37,7 @@ public class TeleOpTankDrive extends Command {
 		reportCurrent("Right Master Current", RobotMap.RIGHT_MASTER_PDP);
 		reportCurrent("Right Slave Current", RobotMap.RIGHT_SLAVE_PDP);
 		robotDrive.tankDrive(adjustSpeed(driveController.getY(Hand.kLeft)), adjustSpeed(driveController.getY(Hand.kRight)));
+		SmartDashboard.putNumber("Closed Loop Ramp Rate:", driveTrain.getLeftMaster().getCloseLoopRampRate());
 	}
 	
 	private void reportCurrent(String label, int channel) {

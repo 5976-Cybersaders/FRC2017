@@ -57,7 +57,7 @@ public class Robot extends IterativeRobot {
 	
 	public SendableChooser<Command> makeChooser() {
 		SendableChooser<Command> chooser = new SendableChooser<>();
-		chooser.addDefault("Default: Drive Straight 2 Revs", new MultiMoveCommand(driveTrain));
+		chooser.addDefault("Default: MMC", new MultiMoveCommand(driveTrain));
 		SmartDashboard.putData("CMH Autonomous Command", chooser);
 		System.out.println("END INIT CHOOSER");
 		return chooser;
