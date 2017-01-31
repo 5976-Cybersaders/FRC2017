@@ -15,13 +15,15 @@ public abstract class InitDriveTrain extends Command {
 		leftSlave = driveTrain.getLeftSlave();
 		rightMaster = driveTrain.getRightMaster();
 		rightSlave = driveTrain.getRightSlave();
-		initTalons();
+		rightMaster.setInverted(true);
+		rightSlave.setInverted(true);
 		requires(driveTrain);
 	}
 	
 	protected abstract void initTalons();
 	
 	protected void initialize() {
+		initTalons();
 		leftMaster.reset();
 		leftMaster.enable();
 		leftMaster.setPosition(0);

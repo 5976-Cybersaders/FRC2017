@@ -26,12 +26,15 @@ public class TeleOpTankDrive extends Command {
 	
 	public double adjustSpeed(double d){
     	double speed = Math.signum(d) * Math.pow(Math.abs(d), Math.pow(4, expoFactor));
+    	//System.out.println("in: " + d + " out: " + speed);
     	return speed;
     }
 	
 	@Override
 	protected void execute() {
-		//System.out.println("Current Left: " + (pdp.getCurrent(2) + pdp.getCurrent(3)) + " Current Right: " + (pdp.getCurrent(12) + pdp.getCurrent(13)));
+		
+		System.out.println("Left Master Encoder Position " + driveTrain.getLeftMaster().getEncPosition() + " Right Master Encoder Position " + driveTrain.getRightMaster().getEncPosition());
+		//System.out.println("Current Left: " + ((pdp.getCurrent(2) + pdp.getCurrent(3))) + " Current Right: " + ((pdp.getCurrent(12) + pdp.getCurrent(13))) + "  Rio: "+pdp.getCurrent(8) + " Total Current:  " +pdp.getTotalCurrent());
 		reportCurrent("Left Master Current", RobotMap.LEFT_MASTER_PDP);
 		reportCurrent("Left Slave Current", RobotMap.LEFT_SLAVE_PDP);
 		reportCurrent("Right Master Current", RobotMap.RIGHT_MASTER_PDP);

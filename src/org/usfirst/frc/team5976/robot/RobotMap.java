@@ -15,10 +15,10 @@ public class RobotMap {
 	public static final int RIGHT_SLAVE = 3;
 	
 	//PDP
-	public static final int LEFT_MASTER_PDP = 12;
-	public static final int LEFT_SLAVE_PDP = 13;
-	public static final int RIGHT_MASTER_PDP = 2;
-	public static final int RIGHT_SLAVE_PDP = 3;
+	public static final int LEFT_MASTER_PDP = 13;
+	public static final int LEFT_SLAVE_PDP = 12;
+	public static final int RIGHT_MASTER_PDP = 3;
+	public static final int RIGHT_SLAVE_PDP = 2;
 
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
@@ -27,9 +27,9 @@ public class RobotMap {
 	
 	//Talon Values
 	public static final float PEAK_VOLTAGE = 6.0f;
-	public static final float PEAK_VOLTAGE_TELEOP = 10f;
+	public static final float PEAK_VOLTAGE_TELEOP = 6f;
 	public static final int ALLOWABLE_ERROR = 10;
-	public static final int kP = 50, kI = 0, kD = 0;
+	public static final double kP = 15, kI = 0.0001, kD = 0;
 	public static final int RAMP_RATE = 0;
 	public static final boolean BRAKE_MODE = false;
 }

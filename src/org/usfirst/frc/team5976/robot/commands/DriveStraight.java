@@ -55,27 +55,28 @@ public class DriveStraight extends Command{
 		System.out.println("Control Mode: " + talon.getControlMode());
 		System.out.println("Device ID" + talon.getDeviceID());
 		System.out.println("Closed Loop Ramp Rate" + talon.getCloseLoopRampRate());
-		System.out.println("P " + talon.getP());
-		System.out.println("I " + talon.getI());
-		System.out.println("D " + talon.getD());
 		System.out.println("Source Type " + talon.getPIDSourceType());
-		System.out.println();
+		System.out.println("Inverted: " + talon.getInverted());
+		System.out.println("PID Values: " + talon.getP() + " " + talon.getI() + " " + talon.getD());
 		System.out.println();
 	}
 	
 	protected void execute() {
 		SmartDashboard.putNumber("Left Revolutions", leftMaster.getPosition());
 		SmartDashboard.putNumber("Right Revolutions", rightMaster.getPosition());
-		reportExecute(leftMaster, "Left");
-		reportExecute(rightMaster, "Right");
+		reportExecute(leftMaster, "Left Master", RobotMap.LEFT_MASTER_PDP);
+		reportExecute(driveTrain.getLeftSlave(), "Left Slave", RobotMap.LEFT_SLAVE_PDP);
+		reportExecute(rightMaster, "Right Master", RobotMap.RIGHT_MASTER_PDP);
+		reportExecute(driveTrain.getRightSlave(), "Right Slave", RobotMap.RIGHT_SLAVE_PDP);
 	}
 	
-	public void reportExecute(CANTalon talon, String side) {
+	public void reportExecute(CANTalon talon, String side, int pdp) {
 		System.out.println(side + " Set: " + talon.getSetpoint() + 
-				" CE: " + talon.getClosedLoopError() +
+				" CE: " + talon.getError() +
 				" Enc Pos: " + talon.getEncPosition() + 
 				" Revs: " + talon.getPosition() + 
 				" Count: " + countWithinError);
+		SmartDashboard.putNumber(side + " Current", driveTrain.getPDP().getCurrent(pdp));
 	}
 	
 	@Override

@@ -21,9 +21,11 @@ public class InitDriveTrainForPositionMode extends InitDriveTrain {
 		System.out.println("END INIT left slave");
 
 		initMaster(rightMaster);
+		//rightMaster.setInverted(true);
 		System.out.println("END INIT right master");
 		
 		initSlave(rightSlave, rightMaster.getDeviceID());
+		//rightSlave.setInverted(true);
 		System.out.println("END INIT right slave");
 	}
 	
@@ -48,7 +50,10 @@ public class InitDriveTrainForPositionMode extends InitDriveTrain {
 	}
 	
 	protected void initSlave(CANTalon talon, int masterID) {
-		super.initSlave(talon, masterID);
+		//super.initSlave(talon, masterID);
+		talon.setControlMode(CANTalon.TalonControlMode.Follower.value);
+		talon.set(masterID);
+		initCommon(talon);
 	}
 	
 	protected double getMaxVoltage() {
