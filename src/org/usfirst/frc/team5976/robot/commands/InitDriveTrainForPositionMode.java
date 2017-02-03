@@ -6,6 +6,7 @@ import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 import com.ctre.CANTalon;
 
 public class InitDriveTrainForPositionMode extends InitDriveTrain {
+	private boolean inversion = true;
 
 	public InitDriveTrainForPositionMode(DriveTrain driveTrain) {
 		super(driveTrain);
@@ -15,17 +16,23 @@ public class InitDriveTrainForPositionMode extends InitDriveTrain {
 	protected void initTalons() {
 		// Setup Talons for use
 		initMaster(leftMaster);
+		//leftMaster.reverseOutput(inversion);
+		//leftMaster.reverseSensor(inversion);
 		System.out.println("END INIT left master");
 		
 		initSlave(leftSlave, leftMaster.getDeviceID());
+		//leftSlave.reverseOutput(inversion);
+		//leftSlave.reverseSensor(inversion);
 		System.out.println("END INIT left slave");
 
 		initMaster(rightMaster);
-		//rightMaster.setInverted(true);
+		//rightMaster.reverseOutput(inversion);
+		//rightMaster.reverseSensor(inversion);
 		System.out.println("END INIT right master");
 		
 		initSlave(rightSlave, rightMaster.getDeviceID());
-		//rightSlave.setInverted(true);
+		//rightSlave.reverseOutput(inversion);
+		//rightSlave.reverseSensor(inversion);
 		System.out.println("END INIT right slave");
 	}
 	
@@ -51,7 +58,8 @@ public class InitDriveTrainForPositionMode extends InitDriveTrain {
 	
 	protected void initSlave(CANTalon talon, int masterID) {
 		//super.initSlave(talon, masterID);
-		talon.setControlMode(CANTalon.TalonControlMode.Follower.value);
+		talon.changeControlMode(CANTalon.TalonControlMode.Follower);
+		//talon.setControlMode(CANTalon.TalonControlMode.Follower.value);
 		talon.set(masterID);
 		initCommon(talon);
 	}

@@ -14,6 +14,8 @@ public class RobotMap {
 	public static final int RIGHT_MASTER = 4;
 	public static final int RIGHT_SLAVE = 3;
 	
+	public static final int CLIMB_MOTOR = 5;
+	
 	//PDP
 	public static final int LEFT_MASTER_PDP = 13;
 	public static final int LEFT_SLAVE_PDP = 12;
@@ -29,7 +31,7 @@ public class RobotMap {
 	public static final float PEAK_VOLTAGE = 6.0f;
 	public static final float PEAK_VOLTAGE_TELEOP = 6f;
 	public static final int ALLOWABLE_ERROR = 10;
-	public static final double kP = 15, kI = 0.0001, kD = 0;
+	public static final double kP = 1, kI = 0, kD = 0;
 	public static final int RAMP_RATE = 0;
 	public static final boolean BRAKE_MODE = false;
 }

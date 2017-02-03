@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team5976.robot.commands.DriveStraight;
 import org.usfirst.frc.team5976.robot.commands.MultiMoveCommand;
+import org.usfirst.frc.team5976.robot.subsystems.Climber;
 import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
 /**
@@ -22,6 +23,7 @@ import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 public class Robot extends IterativeRobot {
 
 	public static DriveTrain driveTrain;
+	public static Climber climber;
 	public static OI oi;
 
 	Command autonomousCommand;
@@ -49,6 +51,7 @@ public class Robot extends IterativeRobot {
 		//Subsystems
 		oi = new OI();
 		driveTrain = new DriveTrain(oi);
+		climber = new Climber(oi);
 		System.out.println("END INIT SUBSYSTEMS");
 		
 		chooser = makeChooser();

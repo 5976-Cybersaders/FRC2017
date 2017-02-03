@@ -14,6 +14,7 @@ public class DriveStraight extends Command{
 	private double revolutions;
 	private double previousError;
 	private int countWithinError;
+	private int printCount;
 	
 	//Wheel values
 	private final int DIAMETER = 6;
@@ -24,6 +25,7 @@ public class DriveStraight extends Command{
 		leftMaster = driveTrain.getLeftMaster();
 		rightMaster = driveTrain.getRightMaster();
 		revolutions = toRevolutions(inches);
+		printCount = 0;
 		requires(driveTrain);
 	}
 	
@@ -39,7 +41,7 @@ public class DriveStraight extends Command{
 		rightMaster.enable();
 		rightMaster.setPosition(0);
 		
-		leftMaster.set(revolutions);
+		leftMaster.set(-revolutions);
 		rightMaster.set(revolutions);
 		countWithinError = 0;
 		previousError = 1000000;
@@ -64,10 +66,18 @@ public class DriveStraight extends Command{
 	protected void execute() {
 		SmartDashboard.putNumber("Left Revolutions", leftMaster.getPosition());
 		SmartDashboard.putNumber("Right Revolutions", rightMaster.getPosition());
-		reportExecute(leftMaster, "Left Master", RobotMap.LEFT_MASTER_PDP);
-		reportExecute(driveTrain.getLeftSlave(), "Left Slave", RobotMap.LEFT_SLAVE_PDP);
-		reportExecute(rightMaster, "Right Master", RobotMap.RIGHT_MASTER_PDP);
-		reportExecute(driveTrain.getRightSlave(), "Right Slave", RobotMap.RIGHT_SLAVE_PDP);
+		if (printCount == 5) {
+			reportExecute(leftMaster, "Left Master", RobotMap.LEFT_MASTER_PDP);
+			reportExecute(driveTrain.getLeftSlave(), "Left Slave", RobotMap.LEFT_SLAVE_PDP);
+			reportExecute(rightMaster, "Right Master", RobotMap.RIGHT_MASTER_PDP);
+			reportExecute(driveTrain.getRightSlave(), "Right Slave", RobotMap.RIGHT_SLAVE_PDP);
+			System.out.println("Inversion: " + leftMaster.getInverted() + " " + driveTrain.getLeftSlave().getInverted() + " " + rightMaster.getInverted() + " " + driveTrain.getRightSlave().getInverted());
+			System.out.println();
+			printCount = 0;
+		}
+		else {
+			printCount++;
+		}
 	}
 	
 	public void reportExecute(CANTalon talon, String side, int pdp) {

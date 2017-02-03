@@ -20,9 +20,17 @@ public class InitDriveTrainForPercentVBusMode extends InitDriveTrain {
 				" " + leftMaster.getControlMode());
 	    */
 		initMaster(leftMaster);
+		//leftMaster.reverseOutput(false);
+		//leftMaster.reverseSensor(false);
 		initSlave(leftSlave, leftMaster.getDeviceID());
+		//leftSlave.reverseOutput(false);
+		//leftSlave.reverseSensor(false);
 		initMaster(rightMaster);
+		//rightMaster.reverseOutput(false);
+		//rightMaster.reverseSensor(false);
 		initSlave(rightSlave, rightMaster.getDeviceID());
+		//rightSlave.reverseOutput(false);
+		//rightSlave.reverseSensor(false);
 		System.out.println(leftMaster.getControlMode());
 		
 		/*System.out.println("Ramp Rate: " + leftMaster.getCloseLoopRampRate() + 

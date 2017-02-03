@@ -15,8 +15,6 @@ public abstract class InitDriveTrain extends Command {
 		leftSlave = driveTrain.getLeftSlave();
 		rightMaster = driveTrain.getRightMaster();
 		rightSlave = driveTrain.getRightSlave();
-		rightMaster.setInverted(true);
-		rightSlave.setInverted(true);
 		requires(driveTrain);
 	}
 	
