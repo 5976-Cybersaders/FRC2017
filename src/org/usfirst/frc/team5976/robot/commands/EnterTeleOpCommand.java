@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class EnterTeleOpCommand extends CommandGroup {
 	
 	public EnterTeleOpCommand(DriveTrain driveTrain) {
-		addSequential(new InitDriveTrainForPercentVBusMode(driveTrain));
+		addSequential(new InitDriveTrainForPercentVBusAllMasters(driveTrain));
 		addSequential(new TeleOpTankDrive(driveTrain.getOI().getDriveController(), driveTrain));
 		System.out.println("END INIT EnterTeleOpCommand");
 	}
