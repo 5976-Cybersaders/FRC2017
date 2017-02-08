@@ -7,14 +7,15 @@ package org.usfirst.frc.team5976.robot;
  * floating around.
  */
 public class RobotMap {
-	//DriveTrain motors
+	//DriveTrain motors CAN IDs
 	//Master motors are the front motors
 	public static final int LEFT_MASTER = 2;
 	public static final int LEFT_SLAVE = 1;
 	public static final int RIGHT_MASTER = 4;
 	public static final int RIGHT_SLAVE = 3;
 	
-	public static final int CLIMB_MOTOR = 5;
+	//RoboRio 
+	public static final int CLIMB_MOTOR = 0;
 	
 	//PDP
 	public static final int LEFT_MASTER_PDP = 13;
@@ -28,7 +29,7 @@ public class RobotMap {
 	// public static int rangefinderModule = 1;
 	
 	//Talon Values
-	public static final float PEAK_VOLTAGE = 6.0f;
+	public static final float PEAK_VOLTAGE = 6f;
 	public static final float PEAK_VOLTAGE_TELEOP = 6f;
 	public static final int ALLOWABLE_ERROR = 10;
 	public static final double kP = 1, kI = 0, kD = 0;

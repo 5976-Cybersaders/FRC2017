@@ -33,12 +33,12 @@ public class TeleOpTankDrive extends Command {
 	@Override
 	protected void execute() {
 		
-		System.out.println("Left Master Encoder Position " + driveTrain.getLeftMaster().getEncPosition() + " Right Master Encoder Position " + driveTrain.getRightMaster().getEncPosition());
+		//System.out.println("Left Master Encoder Position " + driveTrain.getLeftMaster().getEncPosition() + " Right Master Encoder Position " + driveTrain.getRightMaster().getEncPosition());
 		//System.out.println("Current Left: " + ((pdp.getCurrent(2) + pdp.getCurrent(3))) + " Current Right: " + ((pdp.getCurrent(12) + pdp.getCurrent(13))) + "  Rio: "+pdp.getCurrent(8) + " Total Current:  " +pdp.getTotalCurrent());
-		reportCurrent("Left Master Current", RobotMap.LEFT_MASTER_PDP);
-		reportCurrent("Left Slave Current", RobotMap.LEFT_SLAVE_PDP);
-		reportCurrent("Right Master Current", RobotMap.RIGHT_MASTER_PDP);
-		reportCurrent("Right Slave Current", RobotMap.RIGHT_SLAVE_PDP);
+		//reportCurrent("Left Master Current", RobotMap.LEFT_MASTER_PDP);
+		//reportCurrent("Left Slave Current", RobotMap.LEFT_SLAVE_PDP);
+		//reportCurrent("Right Master Current", RobotMap.RIGHT_MASTER_PDP);
+		//reportCurrent("Right Slave Current", RobotMap.RIGHT_SLAVE_PDP);
 		if (driveController.getBumper(Hand.kRight))
 			robotDrive.tankDrive(adjustSpeed(driveController.getY(Hand.kLeft)), adjustSpeed(driveController.getY(Hand.kLeft)));
 		else robotDrive.tankDrive(adjustSpeed(driveController.getY(Hand.kLeft)), adjustSpeed(driveController.getY(Hand.kRight)));

@@ -5,11 +5,12 @@ import org.usfirst.frc.team5976.robot.subsystems.Climber;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TeleOpClimb extends Command {
-	private CANTalon talon;
+	private Talon talon;
 	private XboxController driveController;
 	
 	public TeleOpClimb(XboxController driveController, Climber climber) {
@@ -26,12 +27,13 @@ public class TeleOpClimb extends Command {
 		double input = driveController.getTriggerAxis(Hand.kRight);
 		double output = 0;
 		if (input > 0.5) {
-			output = 0.75;
+			output = 1;
 		}
 		else if (input > 0.1) {
-			output = 0.25;
+			output = 0.4;
 		}
 		talon.set(output);
+		System.out.println("Climber output: " + output);
 	}
 	
 	protected boolean isFinished() {

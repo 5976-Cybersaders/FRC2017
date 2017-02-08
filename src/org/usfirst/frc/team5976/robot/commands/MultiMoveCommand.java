@@ -4,11 +4,15 @@ import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MultiMoveCommand extends CommandGroup {
 	
 	public MultiMoveCommand(DriveTrain driveTrain) {
-		Command forward = new DriveStraight(toInches(2), driveTrain);
+		//double revs = SmartDashboard.getNumber("Revs", 20.0);
+		double revs = 3;
+		System.out.println("Revs to turn " + revs);
+		Command forward = new DriveStraight(toInches(revs), driveTrain);
 		//Command backward = new DriveStraight(toInches(-1), driveTrain);
 		//Command backward2 = new DriveStraight(toInches(-1), driveTrain);
 

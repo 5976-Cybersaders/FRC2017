@@ -7,17 +7,17 @@ import org.usfirst.frc.team5976.robot.commands.TeleOpClimb;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Climber extends Subsystem {
-	private CANTalon talon;
+	private Talon talon;
 	private PowerDistributionPanel pdp;
 	private OI oi;
 	
 	public Climber(OI oi) {
 		this.oi = oi;
-		talon = new CANTalon(RobotMap.CLIMB_MOTOR);
+		talon = new Talon(RobotMap.CLIMB_MOTOR);
 	}
 	
 	@Override
@@ -25,7 +25,7 @@ public class Climber extends Subsystem {
 		setDefaultCommand(new TeleOpClimb(oi.getDriveController(), this));
 	}
 	
-	public CANTalon getTalon() {
+	public Talon getTalon() {
 		return talon;
 	}
 }

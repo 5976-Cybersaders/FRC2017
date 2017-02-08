@@ -23,7 +23,8 @@ public class InitDriveTrainForPercentVBusAllMasters extends InitDriveTrain {
 		initMaster(leftSlave);
 		initMaster(rightMaster);
 		initMaster(rightSlave);
-		System.out.println(leftMaster.getControlMode());
+		rightMaster.reverseSensor(true);
+		
 		
 		/*System.out.println("Ramp Rate: " + leftMaster.getCloseLoopRampRate() + 
 				" " + leftSlave.getCloseLoopRampRate() + 

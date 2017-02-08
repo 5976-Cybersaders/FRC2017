@@ -31,6 +31,11 @@ public class Robot extends IterativeRobot {
 	
 	public Robot() {
 		System.out.println("CONSTRUCTING CMH COMMAND BASED ROBOT");
+		SmartDashboard.putNumber("Revs", 2.0);
+		SmartDashboard.putNumber("P-value", 1.0);
+		SmartDashboard.putNumber("I-value", 0);
+		SmartDashboard.putNumber("D-value", 0);
+		
 	}
 	
 	public void startCompetition() {

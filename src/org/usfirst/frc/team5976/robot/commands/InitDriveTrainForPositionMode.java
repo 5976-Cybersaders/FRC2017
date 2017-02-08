@@ -5,6 +5,8 @@ import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class InitDriveTrainForPositionMode extends InitDriveTrain {
 	private boolean inversion = true;
 
@@ -42,7 +44,12 @@ public class InitDriveTrainForPositionMode extends InitDriveTrain {
 		talon.setVoltageRampRate(RobotMap.RAMP_RATE);
 		talon.enableBrakeMode(RobotMap.BRAKE_MODE);
 		talon.setAllowableClosedLoopErr(RobotMap.ALLOWABLE_ERROR);
-		talon.setPID(RobotMap.kP, RobotMap.kI, RobotMap.kD);
+		
+		double pValue = SmartDashboard.getNumber("P-value", 1.0);
+		double iValue = SmartDashboard.getNumber("I-value", 0);
+		double dValue = SmartDashboard.getNumber("D-value", 0);
+		
+		talon.setPID(pValue, iValue, dValue);
 		talon.enableControl();
 	}
 	
@@ -53,13 +60,14 @@ public class InitDriveTrainForPositionMode extends InitDriveTrain {
 		talon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		talon.configEncoderCodesPerRev(360);
 		talon.setPosition(0);
+		talon.setEncPosition(0);
 		initCommon(talon);
 	}
 	
 	protected void initSlave(CANTalon talon, int masterID) {
 		//super.initSlave(talon, masterID);
-		talon.changeControlMode(CANTalon.TalonControlMode.Follower);
-		//talon.setControlMode(CANTalon.TalonControlMode.Follower.value);
+		//talon.changeControlMode(CANTalon.TalonControlMode.Follower);
+		talon.setControlMode(CANTalon.TalonControlMode.Follower.value);
 		talon.set(masterID);
 		initCommon(talon);
 	}
