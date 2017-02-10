@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveStraight extends EncoderDriveCommand {
 	private int printCount;
+	private String dashboardKey;
+	private double defaultInches;
 	
 	public DriveStraight(double inches, DriveTrain driveTrain) {
 		super(driveTrain);
@@ -17,7 +19,16 @@ public class DriveStraight extends EncoderDriveCommand {
 		printCount = 5;
 	}
 	
+	public DriveStraight(String dashboardKey, double defaultInches, DriveTrain driveTrain) {
+		super(driveTrain);
+		this.dashboardKey = dashboardKey;
+		this.defaultInches = defaultInches;
+	}
+	
 	protected void initialize() {
+		if (dashboardKey != null) {
+			revolutions = toRevolutions(SmartDashboard.getNumber(dashboardKey, defaultInches));
+		}
 		leftMaster.set(-revolutions);
 		rightMaster.set(revolutions);
 	}

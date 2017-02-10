@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Climber extends Subsystem {
 	private Talon talon;
-	private PowerDistributionPanel pdp;
 	private OI oi;
 	
 	public Climber(OI oi) {

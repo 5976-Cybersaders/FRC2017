@@ -1,17 +1,19 @@
 
 package org.usfirst.frc.team5976.robot;
 
+import org.usfirst.frc.team5976.robot.commands.MultiMoveCommand;
+import org.usfirst.frc.team5976.robot.subsystems.Climber;
+import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5976.robot.subsystems.GearDelivery;
+
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team5976.robot.commands.DriveStraight;
-import org.usfirst.frc.team5976.robot.commands.MultiMoveCommand;
-import org.usfirst.frc.team5976.robot.subsystems.Climber;
-import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,6 +26,7 @@ public class Robot extends IterativeRobot {
 
 	public static DriveTrain driveTrain;
 	public static Climber climber;
+	public static GearDelivery gearDelivery;
 	public static OI oi;
 
 	Command autonomousCommand;
@@ -57,7 +60,11 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		driveTrain = new DriveTrain(oi);
 		climber = new Climber(oi);
+		gearDelivery = new GearDelivery(oi);
 		System.out.println("END INIT SUBSYSTEMS");
+		
+		CameraServer.getInstance().startAutomaticCapture(new UsbCamera("camera", 0));
+		System.out.println("END INIT Camera");
 		
 		chooser = makeChooser();
 		System.out.println("END ROBOT INIT");
