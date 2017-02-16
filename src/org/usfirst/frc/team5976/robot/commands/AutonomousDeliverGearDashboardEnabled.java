@@ -18,7 +18,7 @@ public class AutonomousDeliverGearDashboardEnabled extends CommandGroup {
 		Command backward = new DriveStraight("drive3", -4, driveTrain);
 
 		addSequential(new InitDriveTrainForPositionMode(driveTrain));
-		addSequential(forward);
+		addSequential(forward);	
 		addSequential(turn);
 		addSequential(forward2);
 		addSequential(deliverGear);

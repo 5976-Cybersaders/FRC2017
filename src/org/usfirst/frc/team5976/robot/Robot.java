@@ -1,13 +1,13 @@
 
 package org.usfirst.frc.team5976.robot;
 
-import org.usfirst.frc.team5976.robot.commands.MultiMoveCommand;
+import org.usfirst.frc.team5976.robot.commands.AutonomousDeliverGear;
+import org.usfirst.frc.team5976.robot.commands.AutonomousDeliverGearDashboardEnabled;
+import org.usfirst.frc.team5976.robot.commands.AutonomousTimedDriveStraight;
 import org.usfirst.frc.team5976.robot.subsystems.Climber;
 import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5976.robot.subsystems.GearDelivery;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -38,6 +38,10 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("P-value", 1.0);
 		SmartDashboard.putNumber("I-value", 0);
 		SmartDashboard.putNumber("D-value", 0);
+		SmartDashboard.putNumber("drive1", 2.0);
+		SmartDashboard.putNumber("drive2", 1.0);
+		SmartDashboard.putNumber("drive3", 0);
+		SmartDashboard.putNumber("angle", 0);
 		
 	}
 	
@@ -63,7 +67,7 @@ public class Robot extends IterativeRobot {
 		gearDelivery = new GearDelivery(oi);
 		System.out.println("END INIT SUBSYSTEMS");
 		
-		CameraServer.getInstance().startAutomaticCapture(new UsbCamera("camera", 0));
+		//CameraServer.getInstance().startAutomaticCapture(new UsbCamera("camera", 0));
 		System.out.println("END INIT Camera");
 		
 		chooser = makeChooser();
@@ -72,7 +76,9 @@ public class Robot extends IterativeRobot {
 	
 	public SendableChooser<Command> makeChooser() {
 		SendableChooser<Command> chooser = new SendableChooser<>();
-		chooser.addDefault("Default: MMC", new MultiMoveCommand(driveTrain));
+		chooser.addDefault("Default: MMC with Dashboard", new AutonomousDeliverGearDashboardEnabled(driveTrain, gearDelivery));
+		chooser.addObject("Default: MMC", new AutonomousDeliverGear(driveTrain, gearDelivery));
+		chooser.addObject("Auto without encoders", new AutonomousTimedDriveStraight(driveTrain));
 		SmartDashboard.putData("CMH Autonomous Command", chooser);
 		System.out.println("END INIT CHOOSER");
 		return chooser;

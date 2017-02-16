@@ -33,7 +33,7 @@ public class TeleOpClimb extends Command {
 			output = 0.4;
 		}
 		talon.set(output);
-		System.out.println("Climber output: " + output);
+		//System.out.println("Climber output: " + output);
 	}
 	
 	protected boolean isFinished() {

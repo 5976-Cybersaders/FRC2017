@@ -10,9 +10,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Turn extends EncoderDriveCommand {
 	private String dashboardKey;
 	private double defaultAngle;
+	private double angle;
 	
 	public Turn(double angle, DriveTrain driveTrain) {
 		super(driveTrain);
+		this.angle = angle;
 		revolutions = toRevolutionsFromDegrees(angle);
 	}
 	
@@ -23,9 +25,12 @@ public class Turn extends EncoderDriveCommand {
 	}
 	
 	protected void initialize() {
+		super.initialize();
 		if (dashboardKey != null) {
-			revolutions = toRevolutionsFromDegrees(SmartDashboard.getNumber(dashboardKey, defaultAngle));
+			angle = SmartDashboard.getNumber(dashboardKey, defaultAngle);
+			revolutions = toRevolutionsFromDegrees(angle);
 		}
+		System.out.println("STARTING COMMAND TURN ANGLE: " + angle + " REVS: "+ revolutions);
 	}
 	
 	protected void execute() {

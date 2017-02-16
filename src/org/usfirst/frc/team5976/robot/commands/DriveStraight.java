@@ -12,9 +12,11 @@ public class DriveStraight extends EncoderDriveCommand {
 	private int printCount;
 	private String dashboardKey;
 	private double defaultInches;
+	private double inches;
 	
 	public DriveStraight(double inches, DriveTrain driveTrain) {
 		super(driveTrain);
+		this.inches = inches;
 		revolutions = toRevolutions(inches);
 		printCount = 5;
 	}
@@ -26,11 +28,16 @@ public class DriveStraight extends EncoderDriveCommand {
 	}
 	
 	protected void initialize() {
+		super.initialize();
 		if (dashboardKey != null) {
-			revolutions = toRevolutions(SmartDashboard.getNumber(dashboardKey, defaultInches));
+			inches = SmartDashboard.getNumber(dashboardKey, defaultInches);
+			revolutions = toRevolutions(inches);
 		}
-		leftMaster.set(-revolutions);
-		rightMaster.set(revolutions);
+		System.out.println("STARTING COMMAND DRIVE STRAIGHT INCHES: " + inches + " REVS: "+ revolutions);
+		report(leftMaster);
+		report(driveTrain.getLeftSlave());
+		report(rightMaster);
+		report(driveTrain.getRightSlave());
 	}
 	
 	protected void execute() {

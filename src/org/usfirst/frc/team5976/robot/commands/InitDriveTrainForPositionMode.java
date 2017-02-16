@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class InitDriveTrainForPositionMode extends InitDriveTrain {
 	private boolean inversion = true;
 
-	public InitDriveTrainForPositionMode(DriveTrain driveTrain) {
+	public  InitDriveTrainForPositionMode(DriveTrain driveTrain) {
 		super(driveTrain);
 	}
 	
