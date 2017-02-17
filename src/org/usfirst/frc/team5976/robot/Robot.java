@@ -8,6 +8,8 @@ import org.usfirst.frc.team5976.robot.subsystems.Climber;
 import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5976.robot.subsystems.GearDelivery;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -57,8 +59,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		System.out.println("START ROBOT INIT");
-		//CameraServer.getInstance().startAutomaticCapture(new UsbCamera("cam", 0));
-		//System.out.println("INIT CAMERA");
+		CameraServer.getInstance().startAutomaticCapture(new UsbCamera("cam", 0));
+		System.out.println("INIT CAMERA");
 		
 		//Subsystems
 		oi = new OI();
@@ -67,7 +69,7 @@ public class Robot extends IterativeRobot {
 		gearDelivery = new GearDelivery(oi);
 		System.out.println("END INIT SUBSYSTEMS");
 		
-		//CameraServer.getInstance().startAutomaticCapture(new UsbCamera("camera", 0));
+		CameraServer.getInstance().startAutomaticCapture(new UsbCamera("camera", 0));
 		System.out.println("END INIT Camera");
 		
 		chooser = makeChooser();

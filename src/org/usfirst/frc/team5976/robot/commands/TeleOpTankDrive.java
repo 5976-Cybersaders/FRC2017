@@ -16,17 +16,20 @@ public class TeleOpTankDrive extends Command {
 	XboxController driveController;
 	private static double expoFactor = 0.2;
 	private PowerDistributionPanel pdp;
+	private boolean speedReduced;
 	
 	public TeleOpTankDrive(XboxController driveController, DriveTrain driveTrain) {
 		robotDrive = driveTrain.getRobotDrive();
 		this.driveTrain = driveTrain;
 		this.driveController = driveController;
 		pdp = driveTrain.getPDP();
+		speedReduced = false;
 	}
 	
 	public double adjustSpeed(double d){
     	double speed = Math.signum(d) * Math.pow(Math.abs(d), Math.pow(4, expoFactor));
     	//System.out.println("in: " + d + " out: " + speed);
+    	if (speedReduced) return speed * 0.5;
     	return speed;
     }
 	
@@ -39,6 +42,10 @@ public class TeleOpTankDrive extends Command {
 		//reportCurrent("Left Slave Current", RobotMap.LEFT_SLAVE_PDP);
 		//reportCurrent("Right Master Current", RobotMap.RIGHT_MASTER_PDP);
 		//reportCurrent("Right Slave Current", RobotMap.RIGHT_SLAVE_PDP);
+		if (driveController.getBumper(Hand.kLeft)) {
+			speedReduced = true;
+		}
+		else speedReduced = false;
 		if (driveController.getBumper(Hand.kRight))
 			robotDrive.tankDrive(adjustSpeed(driveController.getY(Hand.kLeft)), adjustSpeed(driveController.getY(Hand.kLeft)));
 		else robotDrive.tankDrive(adjustSpeed(driveController.getY(Hand.kLeft)), adjustSpeed(driveController.getY(Hand.kRight)));

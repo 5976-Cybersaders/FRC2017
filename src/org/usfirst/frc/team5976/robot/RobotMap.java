@@ -8,7 +8,7 @@ package org.usfirst.frc.team5976.robot;
  */
 public class RobotMap {
 	//DriveTrain motors CAN IDs
-	//Master motors are the front motors
+	//Master motors are the front motor
 	public static final int LEFT_MASTER = 2;
 	public static final int LEFT_SLAVE = 1;
 	public static final int RIGHT_MASTER = 4;
