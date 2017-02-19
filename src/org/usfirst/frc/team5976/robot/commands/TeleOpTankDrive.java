@@ -1,6 +1,5 @@
 package org.usfirst.frc.team5976.robot.commands;
 
-import org.usfirst.frc.team5976.robot.RobotMap;
 import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -52,9 +51,9 @@ public class TeleOpTankDrive extends Command {
 		SmartDashboard.putNumber("Closed Loop Ramp Rate:", driveTrain.getLeftMaster().getCloseLoopRampRate());
 	}
 	
-	private void reportCurrent(String label, int channel) {
-		SmartDashboard.putNumber(label, pdp.getCurrent(channel));
-	}
+	//private void reportCurrent(String label, int channel) {
+	//	SmartDashboard.putNumber(label, pdp.getCurrent(channel));
+	//}
 	
 	@Override
 	protected boolean isFinished() {

@@ -21,7 +21,7 @@ public class Climber extends Subsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new TeleOpClimb(oi.getDriveController(), this));
+		setDefaultCommand(new TeleOpClimb(oi.getClimbController(), this));
 	}
 	
 	public Talon getTalon() {

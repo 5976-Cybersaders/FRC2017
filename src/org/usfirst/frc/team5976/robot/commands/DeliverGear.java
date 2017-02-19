@@ -15,6 +15,10 @@ public class DeliverGear extends Command {
 	
 	protected void initialize() {
 		startTime = System.currentTimeMillis();
+		System.out.println("INIT " + getClass().getSimpleName());
+	}
+	
+	protected void execute() {
 		gearDelivery.getLeftServo().set(1);
 		gearDelivery.getRightServo().set(0);
 	}
@@ -22,6 +26,10 @@ public class DeliverGear extends Command {
 	@Override
 	protected boolean isFinished() {
 		return (System.currentTimeMillis() - startTime) > 300;
+	}
+	
+	protected void end() {
+		System.out.println("END " + getClass().getSimpleName());
 	}
 
 }

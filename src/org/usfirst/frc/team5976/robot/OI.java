@@ -36,8 +36,13 @@ public class OI {
 	// button.whenReleased(new ExampleCommand());
 	
 	private final XboxController DRIVE_CONTROLLER = new XboxController(0);
+	private final XboxController CLIMB_CONTROLLER = new XboxController(1);
 	
 	public XboxController getDriveController() {
 		return DRIVE_CONTROLLER;
+	}
+	
+	public XboxController getClimbController() {
+		return CLIMB_CONTROLLER;
 	}
 }

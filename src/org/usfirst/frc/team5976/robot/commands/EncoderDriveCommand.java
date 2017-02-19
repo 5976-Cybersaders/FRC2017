@@ -11,19 +11,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public abstract class EncoderDriveCommand extends Command{
 	
 	protected DriveTrain driveTrain;
-	protected CANTalon leftMaster, rightMaster;
+	protected CANTalon leftMaster, leftSlave, rightMaster, rightSlave;
 	protected double revolutions;
 	protected int stableCount;
-	protected double previousError;
+	private double previousError;
 	
-	//Wheel values
-	protected final int STABLE_COUNT_STOP = 20;
+	//Wheel Values
+	private final int STABLE_COUNT_STOP = 20;
 	private final int DIAMETER = 6;
 	
 	public EncoderDriveCommand(DriveTrain driveTrain){
 		this.driveTrain = driveTrain;
 		leftMaster = driveTrain.getLeftMaster();
+		leftSlave = driveTrain.getLeftSlave();
 		rightMaster = driveTrain.getRightMaster();
+		rightSlave = driveTrain.getRightSlave();
 		revolutions = 0;
 		stableCount = 0;
 		previousError = 9999999;
@@ -65,13 +67,10 @@ public abstract class EncoderDriveCommand extends Command{
 		leftMaster.enable();
 		leftMaster.setPosition(0);
 		leftMaster.setEncPosition(0);
-		driveTrain.getLeftSlave().setPosition(0);
 		rightMaster.reset();
 		rightMaster.enable();
 		rightMaster.setPosition(0);
 		rightMaster.setEncPosition(0);
-		rightMaster.reverseSensor(true);
-		driveTrain.getRightSlave().setPosition(0);
 		
 		stableCount = 0;
 		previousError = 1000000;

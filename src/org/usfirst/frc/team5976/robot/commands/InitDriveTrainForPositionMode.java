@@ -18,24 +18,18 @@ public class InitDriveTrainForPositionMode extends InitDriveTrain {
 	protected void initTalons() {
 		// Setup Talons for use
 		initMaster(leftMaster);
-		//leftMaster.reverseOutput(inversion);
-		//leftMaster.reverseSensor(inversion);
+		leftMaster.reverseSensor(inversion);
 		System.out.println("END INIT left master");
 		
-		initSlave(leftSlave, leftMaster.getDeviceID());
-		//leftSlave.reverseOutput(inversion);
-		//leftSlave.reverseSensor(inversion);
-		System.out.println("END INIT left slave");
+		//initSlave(leftSlave, leftMaster.getDeviceID());
+		//System.out.println("END INIT left slave");
 
 		initMaster(rightMaster);
-		//rightMaster.reverseOutput(inversion);
 		//rightMaster.reverseSensor(inversion);
 		System.out.println("END INIT right master");
 		
-		initSlave(rightSlave, rightMaster.getDeviceID());
-		//rightSlave.reverseOutput(inversion);
-		//rightSlave.reverseSensor(inversion);
-		System.out.println("END INIT right slave");
+		//initSlave(rightSlave, rightMaster.getDeviceID());
+		//System.out.println("END INIT right slave");
 	}
 	
 	protected void initCommon(CANTalon talon) {
@@ -54,7 +48,6 @@ public class InitDriveTrainForPositionMode extends InitDriveTrain {
 	}
 	
 	protected void initMaster(CANTalon talon) {
-		super.initMaster(talon);
 		talon.setControlMode(CANTalon.TalonControlMode.Position.value);
 		talon.set(0);
 		talon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
@@ -64,12 +57,18 @@ public class InitDriveTrainForPositionMode extends InitDriveTrain {
 		initCommon(talon);
 	}
 	
+	protected void initSlaves() {
+		initSlave(leftSlave, leftMaster.getDeviceID());
+		initSlave(rightSlave, rightMaster.getDeviceID());
+	}
+	
 	protected void initSlave(CANTalon talon, int masterID) {
-		//super.initSlave(talon, masterID);
-		//talon.changeControlMode(CANTalon.TalonControlMode.Follower);
-		talon.setControlMode(CANTalon.TalonControlMode.Follower.value);
+		//initCommon(talon);
+		talon.configPeakOutputVoltage(getMaxVoltage(), -getMaxVoltage());
+		talon.changeControlMode(CANTalon.TalonControlMode.Follower);
+		//talon.setControlMode(CANTalon.TalonControlMode.Follower.value);
 		talon.set(masterID);
-		initCommon(talon);
+		talon.enable();
 	}
 	
 	protected double getMaxVoltage() {

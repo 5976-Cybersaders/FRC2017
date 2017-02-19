@@ -1,6 +1,5 @@
 package org.usfirst.frc.team5976.robot.commands;
 
-import org.usfirst.frc.team5976.robot.RobotMap;
 import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
 import com.ctre.CANTalon;
@@ -28,9 +27,12 @@ public abstract class InitDriveTrain extends Command {
 		rightMaster.reset();
 		rightMaster.enable();
 		rightMaster.setPosition(0);
+		initSlaves();
 		System.out.println("INIT " + getClass().getSimpleName());
 	}
-
+	
+	protected abstract void initSlaves();
+	
 	protected void execute() {
 		System.out.println("EXECUTING " + getClass().getSimpleName());
 	}
@@ -51,18 +53,6 @@ public abstract class InitDriveTrain extends Command {
 	protected void initCommon(CANTalon talon) {
 		talon.setProfile(0);
 		talon.configPeakOutputVoltage(+getMaxVoltage(), -getMaxVoltage());
-		//talon.setCloseLoopRampRate(0);
-		//talon.setVoltageRampRate(0);
-	}
-	
-	protected void initMaster(CANTalon talon) {
-		
-	}
-	
-	protected void initSlave(CANTalon talon, int masterID) {
-		talon.setControlMode(CANTalon.TalonControlMode.Follower.value);
-		talon.set(masterID);
-		initCommon(talon);
 	}
 	
 	protected abstract double getMaxVoltage();

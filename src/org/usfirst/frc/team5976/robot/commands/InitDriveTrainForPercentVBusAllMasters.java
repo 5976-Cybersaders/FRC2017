@@ -23,7 +23,6 @@ public class InitDriveTrainForPercentVBusAllMasters extends InitDriveTrain {
 		initMaster(leftSlave);
 		initMaster(rightMaster);
 		initMaster(rightSlave);
-		rightMaster.reverseSensor(true);
 		
 		
 		/*System.out.println("Ramp Rate: " + leftMaster.getCloseLoopRampRate() + 
@@ -46,14 +45,12 @@ public class InitDriveTrainForPercentVBusAllMasters extends InitDriveTrain {
 		initCommon(talon);
 	}
 	
-	protected void initSlave(CANTalon talon, int masterID) {
-		//super.initSlave(talon, masterID);
-		talon.setControlMode(CANTalon.TalonControlMode.Follower.value);
-		talon.set(masterID);
-		initCommon(talon);
-	}
-	
 	protected double getMaxVoltage() {
 		return RobotMap.PEAK_VOLTAGE_TELEOP;
+	}
+
+	@Override
+	protected void initSlaves() {
+		
 	}
 }

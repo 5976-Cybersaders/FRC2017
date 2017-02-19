@@ -24,13 +24,13 @@ public class TeleOpControlGearDelivery extends Command {
 	}
 	
 	protected void execute() {
-		if (driveController.getBumper(Hand.kLeft)) {
+		if (driveController.getTriggerAxis(Hand.kLeft) > 0.5) {
 			leftServo.set(0);
 			rightServo.set(1);
 		}
 		else {
-			leftServo.set(0.5);
-			rightServo.set(0.5);
+			leftServo.set(0.2);
+			rightServo.set(0.8);
 		}
 	}
 

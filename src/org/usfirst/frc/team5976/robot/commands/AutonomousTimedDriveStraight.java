@@ -2,14 +2,13 @@ package org.usfirst.frc.team5976.robot.commands;
 
 import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 public class AutonomousTimedDriveStraight extends EncoderDriveCommand {
 	
 	private DriveTrain driveTrain;
 	private long t0;
 	private long timeMS = 1000;
 	private double speed = -0.5;
+	
 	public AutonomousTimedDriveStraight(DriveTrain driveTrain){
 		super(driveTrain);
 		this.driveTrain = driveTrain;
