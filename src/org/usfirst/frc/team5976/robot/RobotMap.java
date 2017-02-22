@@ -25,7 +25,7 @@ public class RobotMap {
 	public static final int RIGHT_SLAVE_PDP = 2;
 	
 	//Talon Values
-	public static final float PEAK_VOLTAGE = 6f;
+	public static final float PEAK_VOLTAGE = 2.5f;
 	public static final float PEAK_VOLTAGE_TELEOP = 6f;
 	public static final int ALLOWABLE_ERROR = 100;
 	public static final int RAMP_RATE = 0;

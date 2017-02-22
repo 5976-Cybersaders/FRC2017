@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousDeliverGear extends CommandGroup {
 
-	public AutonomousDeliverGear(DriveTrain driveTrain, GearDelivery gearDelivery) {
+	public AutonomousDeliverGear(DriveTrain driveTrain) {
 		//Drive variables should be in inches
 		double drive1 = 1;
 		double angle = 180;
@@ -18,8 +18,6 @@ public class AutonomousDeliverGear extends CommandGroup {
 		addSequential(new DriveStraight(drive1, driveTrain));
 		addSequential(new Turn(angle, driveTrain));
 		addSequential(new DriveStraight(drive2, driveTrain));
-		addSequential(new DeliverGear(gearDelivery));
-		addSequential(new DriveStraight(drive3, driveTrain));
 		System.out.println("END INIT MMC");
 	}
 }

@@ -29,8 +29,8 @@ public class TeleOpControlGearDelivery extends Command {
 			rightServo.set(1);
 		}
 		else {
-			leftServo.set(0.2);
-			rightServo.set(0.8);
+			leftServo.set(0.15);
+			rightServo.set(0.75);
 		}
 	}
 

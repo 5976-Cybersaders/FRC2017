@@ -6,8 +6,8 @@ public class AutonomousTimedDriveStraight extends EncoderDriveCommand {
 	
 	private DriveTrain driveTrain;
 	private long t0;
-	private long timeMS = 1000;
-	private double speed = -0.5;
+	private long timeMS = 6750; //3000 and 6750 hey thats pretty good
+	private double speed = -0.4; //-0.5 and -0.4 hey thats pretty good
 	
 	public AutonomousTimedDriveStraight(DriveTrain driveTrain){
 		super(driveTrain);

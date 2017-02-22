@@ -14,6 +14,7 @@ public abstract class EncoderDriveCommand extends Command{
 	protected CANTalon leftMaster, leftSlave, rightMaster, rightSlave;
 	protected double revolutions;
 	protected int stableCount;
+	protected int printCounter = 20, printInterval = 20;
 	private double previousError;
 	
 	//Wheel Values
@@ -26,6 +27,7 @@ public abstract class EncoderDriveCommand extends Command{
 		leftSlave = driveTrain.getLeftSlave();
 		rightMaster = driveTrain.getRightMaster();
 		rightSlave = driveTrain.getRightSlave();
+		
 		revolutions = 0;
 		stableCount = 0;
 		previousError = 9999999;
@@ -70,7 +72,7 @@ public abstract class EncoderDriveCommand extends Command{
 		rightMaster.reset();
 		rightMaster.enable();
 		rightMaster.setPosition(0);
-		rightMaster.setEncPosition(0);
+		rightMaster.setEncPosition(400);
 		
 		stableCount = 0;
 		previousError = 1000000;

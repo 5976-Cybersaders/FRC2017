@@ -9,7 +9,6 @@ public class Turn extends EncoderDriveCommand {
 	private String dashboardKey;
 	private double defaultAngle;
 	private double angle;
-	private int printCount = 5;
 	
 	public Turn(double angle, DriveTrain driveTrain) {
 		super(driveTrain);
@@ -38,13 +37,13 @@ public class Turn extends EncoderDriveCommand {
 		rightMaster.set(revolutions);
 		rightSlave.set(rightMaster.getDeviceID());
 		
-		if (printCount >= 5) {
+		if (printCounter >= printInterval) {
 			reportExecute(leftMaster, "Left Master", RobotMap.LEFT_MASTER_PDP);
 			//reportExecute(leftSlave, "Left Slave", RobotMap.LEFT_SLAVE_PDP);
 			reportExecute(rightMaster, "Right Master", RobotMap.RIGHT_MASTER_PDP);
 			//reportExecute(rightSlave, "Right Slave", RobotMap.RIGHT_SLAVE_PDP);
-			printCount = 0;
-		} else printCount++;
+			printCounter = 0;
+		} else printCounter++;
 	}
 	
 	public double toRevolutionsFromDegrees(double angle) {

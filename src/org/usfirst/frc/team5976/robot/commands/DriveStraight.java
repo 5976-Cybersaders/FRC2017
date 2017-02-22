@@ -6,7 +6,6 @@ import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveStraight extends EncoderDriveCommand {
-	private int printCount;
 	private String dashboardKey;
 	private double defaultInches;
 	private double inches;
@@ -15,7 +14,6 @@ public class DriveStraight extends EncoderDriveCommand {
 		super(driveTrain);
 		this.inches = inches;
 		revolutions = toRevolutions(inches);
-		printCount = 5;
 	}
 	
 	public DriveStraight(String dashboardKey, double defaultInches, DriveTrain driveTrain) {
@@ -45,16 +43,16 @@ public class DriveStraight extends EncoderDriveCommand {
 		rightMaster.set(revolutions);
 		rightSlave.set(rightMaster.getDeviceID());
 		
-		if (printCount == 5) {
+		if (printCounter == printInterval) {
 			reportExecute(leftMaster, "Left Master", RobotMap.LEFT_MASTER_PDP);
 			//reportExecute(leftSlave, "Left Slave", RobotMap.LEFT_SLAVE_PDP);
 			reportExecute(rightMaster, "Right Master", RobotMap.RIGHT_MASTER_PDP);
 			//reportExecute(rightSlave, "Right Slave", RobotMap.RIGHT_SLAVE_PDP);
 			System.out.println();
-			printCount = 0;
+			printCounter = 0;
 		}
 		else {
-			printCount++;
+			printCounter++;
 		}
 	}
 }

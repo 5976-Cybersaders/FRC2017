@@ -23,12 +23,11 @@ public class TeleOpClimb extends Command {
 	}
 	
 	protected void execute() {
-		double input = climbController.getY(Hand.kLeft);
-		double output = 0;
-		if (input > 0.5) output = 1;
-		else if (input > 0.1) output = 0.4;
+		double input = Math.abs(climbController.getY(Hand.kLeft));
+		double output = input > 0.1 ? input: 0;
 		if (climbController.getXButton()) hasClimbed = true;
-		if (hasClimbed) output = 1;
+		if (climbController.getAButton()) hasClimbed = false;
+		if (hasClimbed) output = 0.45;
 		talon.set(output);
 	}
 	
