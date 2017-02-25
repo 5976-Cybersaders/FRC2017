@@ -1,33 +1,27 @@
 package org.usfirst.frc.team5976.robot.commands;
 
 import org.usfirst.frc.team5976.robot.RobotMap;
+import org.usfirst.frc.team5976.robot.SmartValue;
 import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Turn extends EncoderDriveCommand {
-	private String dashboardKey;
-	private double defaultAngle;
 	private double angle;
 	
 	public Turn(double angle, DriveTrain driveTrain) {
 		super(driveTrain);
 		this.angle = angle;
-		revolutions = toRevolutionsFromDegrees(angle);
 	}
 	
-	public Turn(String dashboardKey, double defaultAngle, DriveTrain driveTrain) {
+	public Turn(SmartValue angle, DriveTrain driveTrain) {
 		super(driveTrain);
-		this.dashboardKey = dashboardKey;
-		this.defaultAngle = defaultAngle;
+		this.angle = angle.getValue();
 	}
 	
 	protected void initialize() {
 		super.initialize();
-		if (dashboardKey != null) {
-			angle = SmartDashboard.getNumber(dashboardKey, defaultAngle);
-			revolutions = toRevolutionsFromDegrees(angle);
-		}
+		revolutions = toRevolutionsFromDegrees(angle);
 		System.out.println("STARTING COMMAND TURN ANGLE: " + angle + " REVS: "+ revolutions);
 	}
 	

@@ -1,16 +1,14 @@
 
 package org.usfirst.frc.team5976.robot;
 
-import org.usfirst.frc.team5976.robot.commands.AutonomousDeliverGear;
 import org.usfirst.frc.team5976.robot.commands.AutonomousDeliverGearDashboardEnabled;
-import org.usfirst.frc.team5976.robot.commands.AutonomousDriveStraight;
 import org.usfirst.frc.team5976.robot.commands.AutonomousTimedDriveStraight;
 import org.usfirst.frc.team5976.robot.commands.DoNothingMMC;
+import org.usfirst.frc.team5976.robot.subsystems.Climber;
 import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.NamedSendable;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -27,7 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static DriveTrain driveTrain;
-	//public static Climber climber;
+	public static Climber climber;
 	public static OI oi;
 
 	Command autonomousCommand;
@@ -35,15 +33,7 @@ public class Robot extends IterativeRobot {
 	
 	public Robot() {
 		System.out.println("CONSTRUCTING CMH COMMAND BASED ROBOT");
-		SmartDashboard.putNumber("Revs", 2.0);
-		SmartDashboard.putNumber("P-value", 1.0);
-		SmartDashboard.putNumber("I-value", 0);
-		SmartDashboard.putNumber("D-value", 0);
-		SmartDashboard.putNumber("drive1", 75.0);
-		SmartDashboard.putNumber("drive2", 0);
-		SmartDashboard.putNumber("drive3", 0);
-		SmartDashboard.putNumber("angle", 0);
-		
+		SmartDashboardMap.reportAll();
 	}
 	
 	public void startCompetition() {
@@ -64,7 +54,7 @@ public class Robot extends IterativeRobot {
 		//Subsystems
 		oi = new OI();
 		driveTrain = new DriveTrain(oi);
-		//climber = new Climber(oi);
+		climber = new Climber(oi);
 		System.out.println("END INIT SUBSYSTEMS");
 		
 		chooser = makeChooser();
@@ -73,10 +63,9 @@ public class Robot extends IterativeRobot {
 	
 	public SendableChooser<Command> makeChooser() {
 		SendableChooser<Command> chooser = new SendableChooser<>();
-		chooser.addObject("Deliver Straight with Dashboard", new AutonomousDriveStraight(driveTrain));
-		chooser.addObject("Deliver Gear with Dashboard", new AutonomousDeliverGearDashboardEnabled(driveTrain));
-		chooser.addObject("Deliver Gear without Dashboard", new AutonomousDeliverGear(driveTrain));
-		chooser.addDefault("Drive Forward without Encoders", new AutonomousTimedDriveStraight(driveTrain));
+		//chooser.addObject("Deliver Straight Dashboard", new AutonomousDriveStraight(driveTrain));
+		chooser.addObject("Encoder Deliver Gear (Side)", new AutonomousDeliverGearDashboardEnabled(driveTrain));
+		chooser.addDefault("Timed Deliver Gear (Middle)", new AutonomousTimedDriveStraight(driveTrain));
 		chooser.addObject("Do Nothing", new DoNothingMMC(driveTrain));
 		SmartDashboard.putData("Autonomous Commands", chooser);
 		System.out.println("END INIT CHOOSER");
@@ -115,15 +104,6 @@ public class Robot extends IterativeRobot {
 		driveTrain.updateDefaultCommandForNonTeleOp();
 		autonomousCommand = chooser.getSelected();
 
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		
 		if (autonomousCommand != null) {
 			System.out.println("START " + autonomousCommand.getName());
 			autonomousCommand.start();

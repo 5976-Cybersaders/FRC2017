@@ -2,12 +2,10 @@ package org.usfirst.frc.team5976.robot.subsystems;
 
 import org.usfirst.frc.team5976.robot.OI;
 import org.usfirst.frc.team5976.robot.RobotMap;
-import org.usfirst.frc.team5976.robot.commands.DoNothingCommand;
 import org.usfirst.frc.team5976.robot.commands.EnterTeleOpCommand;
 
 import com.ctre.CANTalon;
 
-import edu.wpi.first.wpilibj.MotorSafety;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;

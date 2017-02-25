@@ -4,9 +4,6 @@ import org.usfirst.frc.team5976.robot.OI;
 import org.usfirst.frc.team5976.robot.RobotMap;
 import org.usfirst.frc.team5976.robot.commands.TeleOpClimb;
 
-import com.ctre.CANTalon;
-
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 

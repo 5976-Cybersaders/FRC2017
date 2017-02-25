@@ -1,6 +1,6 @@
 package org.usfirst.frc.team5976.robot.commands;
 
-import org.usfirst.frc.team5976.robot.RobotMap;
+import org.usfirst.frc.team5976.robot.SmartDashboardMap;
 import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
 import com.ctre.CANTalon;
@@ -16,10 +16,12 @@ public abstract class EncoderDriveCommand extends Command{
 	protected int stableCount;
 	protected int printCounter = 20, printInterval = 20;
 	private double previousError;
+	private long t0 = 0;
 	
 	//Wheel Values
 	private final int STABLE_COUNT_STOP = 20;
 	private final int DIAMETER = 6;
+	private final double revsPerSecond = 1.6;
 	
 	public EncoderDriveCommand(DriveTrain driveTrain){
 		this.driveTrain = driveTrain;
@@ -81,6 +83,8 @@ public abstract class EncoderDriveCommand extends Command{
 		report(driveTrain.getLeftSlave());
 		report(driveTrain.getRightMaster());
 		report(driveTrain.getRightSlave());
+		
+		t0 = System.currentTimeMillis();
 	}
 	
 	protected double toRevolutions(double inches){
@@ -90,11 +94,14 @@ public abstract class EncoderDriveCommand extends Command{
 	@Override
 	protected boolean isFinished() {
 		double currentError = (leftMaster.getError() + rightMaster.getError()) / 2;
-		if (Math.abs(currentError) < RobotMap.ALLOWABLE_ERROR && previousError == currentError) {
+		if (Math.abs(currentError) < SmartDashboardMap.ALLOWABLE_ERROR.getValue() && previousError == currentError) {
 			stableCount++;
 			if (stableCount >= STABLE_COUNT_STOP) return true;
 		}
 		else {
+			if (System.currentTimeMillis() - t0 >= getTimeOut()){
+				return true;
+			}
 			stableCount = 0;
 			previousError = currentError;
 		}
@@ -108,4 +115,9 @@ public abstract class EncoderDriveCommand extends Command{
 	protected void interrupted() {
         end();
     }
+	
+	protected double getTimeOut(){
+		double targetRevs = (Math.abs(leftMaster.getSetpoint()) + Math.abs(rightMaster.getSetpoint()))/2;
+		return targetRevs*revsPerSecond*1000;
+	}
 }

@@ -1,33 +1,27 @@
 package org.usfirst.frc.team5976.robot.commands;
 
 import org.usfirst.frc.team5976.robot.RobotMap;
+import org.usfirst.frc.team5976.robot.SmartValue;
 import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveStraight extends EncoderDriveCommand {
-	private String dashboardKey;
-	private double defaultInches;
 	private double inches;
 	
 	public DriveStraight(double inches, DriveTrain driveTrain) {
 		super(driveTrain);
 		this.inches = inches;
-		revolutions = toRevolutions(inches);
 	}
 	
-	public DriveStraight(String dashboardKey, double defaultInches, DriveTrain driveTrain) {
+	public DriveStraight(SmartValue drive, DriveTrain driveTrain) {
 		super(driveTrain);
-		this.dashboardKey = dashboardKey;
-		this.defaultInches = defaultInches;
+		inches = drive.getValue();
 	}
 	
 	protected void initialize() {
 		super.initialize();
-		if (dashboardKey != null) {
-			inches = SmartDashboard.getNumber(dashboardKey, defaultInches);
-			revolutions = toRevolutions(inches);
-		}
+		revolutions = toRevolutions(inches);
 		System.out.println("STARTING COMMAND DRIVE STRAIGHT INCHES: " + inches + " REVS: "+ revolutions);
 		report(leftMaster);
 		report(leftSlave);

@@ -20,6 +20,7 @@ public class AutonomousTimedDriveStraight extends EncoderDriveCommand {
 		t0 = System.currentTimeMillis();
 		report(leftMaster);
 		report(rightMaster);
+		System.out.println("INIT " + getClass().getSimpleName());
 	}
 	
 	protected void execute(){
@@ -34,5 +35,6 @@ public class AutonomousTimedDriveStraight extends EncoderDriveCommand {
 	protected void end() {
 		report(leftMaster);
 		report(rightMaster);
+		System.out.println("END " + getClass().getSimpleName());
 	}
 }
