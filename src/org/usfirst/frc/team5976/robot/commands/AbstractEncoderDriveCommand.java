@@ -7,7 +7,7 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public abstract class EncoderDriveCommand extends Command {
+public abstract class AbstractEncoderDriveCommand extends Command {
 	
 	protected DriveTrain driveTrain;
 	protected CANTalon leftMaster, leftSlave, rightMaster, rightSlave;
@@ -22,7 +22,7 @@ public abstract class EncoderDriveCommand extends Command {
 	private final int DIAMETER = 6;
 	private final double revsPerSecond = 1.6;
 	
-	public EncoderDriveCommand(DriveTrain driveTrain){
+	public AbstractEncoderDriveCommand(DriveTrain driveTrain){
 		this.driveTrain = driveTrain;
 		leftMaster = driveTrain.getLeftMaster();
 		leftSlave = driveTrain.getLeftSlave();

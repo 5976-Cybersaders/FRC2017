@@ -25,7 +25,10 @@ public class RobotMap {
 	public static final int RIGHT_SLAVE_PDP = 2;
 	
 	//Talon Values
-	public static final double PEAK_VOLTAGE = 2.5;
+	public static final double PEAK_VOLTAGE_POSITION_MODE = 2.5;
+	//***RUN TeleOp BEFORE THE FIRST PRACTICE MATCH***//
+	//Change back to 6 if AutonomousTimedDriveStraight goes TOO fast
+	//and affects our ability to go straight
 	public static final double PEAK_VOLTAGE_TELEOP = 12.0;
 	public static final int RAMP_RATE = 0;
 	public static final boolean BRAKE_MODE = false;

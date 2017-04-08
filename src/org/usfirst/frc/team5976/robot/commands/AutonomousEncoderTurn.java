@@ -4,21 +4,21 @@ import org.usfirst.frc.team5976.robot.RobotMap;
 import org.usfirst.frc.team5976.robot.SmartValue;
 import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
-public class Turn extends EncoderDriveCommand {
+public class AutonomousEncoderTurn extends AbstractEncoderDriveCommand {
 	private double angle;
 	private SmartValue smartTime, smartAngle;
 	
-	public Turn(double angle, DriveTrain driveTrain) {
+	public AutonomousEncoderTurn(double angle, DriveTrain driveTrain) {
 		super(driveTrain);
 		this.angle = angle;
 	}
 	
-	public Turn(SmartValue smartAngle, DriveTrain driveTrain) {
+	public AutonomousEncoderTurn(SmartValue smartAngle, DriveTrain driveTrain) {
 		super(driveTrain);
 		this.smartAngle = smartAngle;
 	}
 	
-	public Turn(SmartValue smartAngle, DriveTrain driveTrain, SmartValue smartTime) {
+	public AutonomousEncoderTurn(SmartValue smartAngle, DriveTrain driveTrain, SmartValue smartTime) {
 		super(driveTrain);
 		this.smartAngle = smartAngle;
 		this.smartTime = smartTime;

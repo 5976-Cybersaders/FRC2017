@@ -7,7 +7,7 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class InitDriveTrainForPositionMode extends InitDriveTrain {
+public class InitDriveTrainForPositionMode extends AbstractInitDriveTrain {
 	private boolean inversion = true;
 
 	private double LEFT_VOLTS = 3.99;
@@ -84,6 +84,6 @@ public class InitDriveTrainForPositionMode extends InitDriveTrain {
 	}
 	
 	protected double getMaxVoltage() {
-		return RobotMap.PEAK_VOLTAGE;
+		return RobotMap.PEAK_VOLTAGE_POSITION_MODE;
 	}
 }

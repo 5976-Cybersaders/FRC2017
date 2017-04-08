@@ -5,7 +5,6 @@ import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -14,14 +13,14 @@ public class TeleOpTankDrive extends Command {
 	DriveTrain driveTrain;
 	XboxController driveController;
 	private static double expoFactor = 0.2;
-	private PowerDistributionPanel pdp;
+	//private PowerDistributionPanel pdp;
 	private boolean speedReduced;
 	
 	public TeleOpTankDrive(XboxController driveController, DriveTrain driveTrain) {
 		robotDrive = driveTrain.getRobotDrive();
 		this.driveTrain = driveTrain;
 		this.driveController = driveController;
-		pdp = driveTrain.getPDP();
+		//pdp = driveTrain.getPDP();
 		speedReduced = false;
 	}
 	

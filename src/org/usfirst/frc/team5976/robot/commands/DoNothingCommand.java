@@ -3,10 +3,21 @@ package org.usfirst.frc.team5976.robot.commands;
 import org.usfirst.frc.team5976.robot.RobotMap;
 import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
-public class DoNothingCommand extends EncoderDriveCommand {
+import com.ctre.CANTalon;
+
+import edu.wpi.first.wpilibj.command.Command;
+
+public class DoNothingCommand extends Command{
+	private DriveTrain driveTrain;
+	private CANTalon leftMaster, rightMaster, leftSlave, rightSlave;
+	private int printCounter = 20, printInterval = 20;
 	
 	public DoNothingCommand(DriveTrain driveTrain) {
-		super(driveTrain);
+		this.driveTrain = driveTrain;
+		leftMaster = driveTrain.getLeftMaster();
+		rightMaster = driveTrain.getRightMaster();
+		leftSlave = driveTrain.getLeftSlave();
+		rightSlave = driveTrain.getRightSlave();
 	}
 	
 	protected void initialize() {
@@ -44,5 +55,9 @@ public class DoNothingCommand extends EncoderDriveCommand {
 	protected void end() {
 		leftMaster.setSafetyEnabled(true);
 		rightMaster.setSafetyEnabled(true);
+	}
+	
+	protected void reportExecute(CANTalon talon, String description, int pdpPort) {
+		ReportHelper.reportExecute(talon, description, driveTrain.getPDP(), pdpPort, 0);
 	}
 }

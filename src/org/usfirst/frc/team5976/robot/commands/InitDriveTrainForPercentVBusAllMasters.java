@@ -5,7 +5,7 @@ import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
 import com.ctre.CANTalon;
 
-public class InitDriveTrainForPercentVBusAllMasters extends InitDriveTrain {
+public class InitDriveTrainForPercentVBusAllMasters extends AbstractInitDriveTrain {
 
 	public InitDriveTrainForPercentVBusAllMasters(DriveTrain driveTrain) {
 		super(driveTrain);
@@ -36,7 +36,10 @@ public class InitDriveTrainForPercentVBusAllMasters extends InitDriveTrain {
 	protected void initCommon(CANTalon talon) {
 		//super.initCommon(talon);
 		talon.setPID(0, 0, 0);
-		talon.configPeakOutputVoltage(+6.0, -6.0);
+		talon.configPeakOutputVoltage(+getMaxVoltage(), -getMaxVoltage());
+		//***RUN TeleOp BEFORE THE FIRST PRACTICE MATCH***//
+		//Change back to 6 if AutonomousTimedDriveStraight goes TOO fast
+		//and affects our ability to go straight
 	}
 	
 	protected void initMaster(CANTalon talon) {

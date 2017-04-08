@@ -6,10 +6,10 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public abstract class InitDriveTrain extends Command {
+public abstract class AbstractInitDriveTrain extends Command {
 	protected CANTalon leftMaster, rightMaster, leftSlave, rightSlave; 
 	
-	public InitDriveTrain(DriveTrain driveTrain) {
+	public AbstractInitDriveTrain(DriveTrain driveTrain) {
 		leftMaster = driveTrain.getLeftMaster();
 		leftSlave = driveTrain.getLeftSlave();
 		rightMaster = driveTrain.getRightMaster();

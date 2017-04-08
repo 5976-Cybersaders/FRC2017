@@ -18,15 +18,14 @@ public class AutonomousTimedDriveStraight extends Command {
 		requires(driveTrain);
 	}
 	
-	public AutonomousTimedDriveStraight(DriveTrain driveTrain, long time){
+	public AutonomousTimedDriveStraight(DriveTrain driveTrain, SmartValue smartTime){
 		this(driveTrain);
-		timeMS = time;
+		this.smartTime = smartTime;
 	}
 	
 	public AutonomousTimedDriveStraight(DriveTrain driveTrain, SmartValue smartTime, SmartValue smartSpeed){
-		this(driveTrain);
+		this(driveTrain, smartTime);
 		this.smartSpeed = smartSpeed;
-		this.smartTime = smartTime;
 	}
 	
 	protected void initialize(){

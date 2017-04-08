@@ -6,16 +6,16 @@ import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DriveStraight extends EncoderDriveCommand {
+public class AutonomousEncoderDriveStraight extends AbstractEncoderDriveCommand {
 	private double inches;
 	private SmartValue smartDistance;
 	
-	public DriveStraight(double inches, DriveTrain driveTrain) {
+	public AutonomousEncoderDriveStraight(double inches, DriveTrain driveTrain) {
 		super(driveTrain);
 		this.inches = inches;
 	}
 	
-	public DriveStraight(SmartValue smartDistance, DriveTrain driveTrain) {
+	public AutonomousEncoderDriveStraight(SmartValue smartDistance, DriveTrain driveTrain) {
 		super(driveTrain);
 		this.smartDistance = smartDistance;
 	}

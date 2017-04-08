@@ -1,7 +1,8 @@
 
 package org.usfirst.frc.team5976.robot;
 
-import org.usfirst.frc.team5976.robot.commands.AutonomousDeliverGearDashboardEnabled;
+import org.usfirst.frc.team5976.robot.commands.AutonomousEncoderDeliverGear;
+import org.usfirst.frc.team5976.robot.commands.AutonomousTimedDeliverGear;
 import org.usfirst.frc.team5976.robot.commands.AutonomousTimedDriveStraight;
 import org.usfirst.frc.team5976.robot.commands.DoNothingMMC;
 import org.usfirst.frc.team5976.robot.subsystems.Climber;
@@ -62,9 +63,9 @@ public class Robot extends IterativeRobot {
 	
 	public SendableChooser<Command> makeChooser() {
 		SendableChooser<Command> chooser = new SendableChooser<>();
-		//chooser.addObject("Deliver Straight Dashboard", new AutonomousDriveStraight(driveTrain));
-		chooser.addObject("Encoder Deliver Gear (Side)", new AutonomousDeliverGearDashboardEnabled(driveTrain));
 		chooser.addDefault("Timed Deliver Gear (Middle)", new AutonomousTimedDriveStraight(driveTrain));
+		chooser.addObject("Timed Deliver Gear (Side)", new AutonomousTimedDeliverGear(driveTrain));
+		chooser.addObject("Encoder Deliver Gear (Side)", new AutonomousEncoderDeliverGear(driveTrain));
 		chooser.addObject("Do Nothing", new DoNothingMMC(driveTrain));
 		SmartDashboard.putData("Autonomous Commands", chooser);
 		System.out.println("END INIT CHOOSER");
