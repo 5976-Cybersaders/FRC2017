@@ -11,8 +11,17 @@ public class SmartValue {
 		this.defaultValue = defaultValue;
 		SmartDashboard.putNumber(key, defaultValue);
 	}
-	public double getValue(){
+	
+	private double getValue(){
 		return SmartDashboard.getNumber(key, defaultValue);
+	}
+	
+	public long getLong() {
+		return (long)getValue();
+	}
+	
+	public double getDouble() {
+		return getValue();
 	}
 	
 	public String getKey() {

@@ -26,7 +26,7 @@ public class RobotMap {
 	
 	//Talon Values
 	public static final double PEAK_VOLTAGE = 2.5;
-	public static final double PEAK_VOLTAGE_TELEOP = 6.0;
+	public static final double PEAK_VOLTAGE_TELEOP = 12.0;
 	public static final int RAMP_RATE = 0;
 	public static final boolean BRAKE_MODE = false;
 }

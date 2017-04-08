@@ -8,19 +8,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveStraight extends EncoderDriveCommand {
 	private double inches;
+	private SmartValue smartDistance;
 	
 	public DriveStraight(double inches, DriveTrain driveTrain) {
 		super(driveTrain);
 		this.inches = inches;
 	}
 	
-	public DriveStraight(SmartValue drive, DriveTrain driveTrain) {
+	public DriveStraight(SmartValue smartDistance, DriveTrain driveTrain) {
 		super(driveTrain);
-		inches = drive.getValue();
+		this.smartDistance = smartDistance;
 	}
 	
 	protected void initialize() {
 		super.initialize();
+		if (smartDistance != null) inches = smartDistance.getDouble();
 		revolutions = toRevolutions(inches);
 		System.out.println("STARTING COMMAND DRIVE STRAIGHT INCHES: " + inches + " REVS: "+ revolutions);
 		report(leftMaster);

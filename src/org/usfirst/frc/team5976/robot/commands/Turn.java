@@ -4,30 +4,37 @@ import org.usfirst.frc.team5976.robot.RobotMap;
 import org.usfirst.frc.team5976.robot.SmartValue;
 import org.usfirst.frc.team5976.robot.subsystems.DriveTrain;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 public class Turn extends EncoderDriveCommand {
 	private double angle;
+	private SmartValue smartTime, smartAngle;
 	
 	public Turn(double angle, DriveTrain driveTrain) {
 		super(driveTrain);
 		this.angle = angle;
 	}
 	
-	public Turn(SmartValue angle, DriveTrain driveTrain) {
+	public Turn(SmartValue smartAngle, DriveTrain driveTrain) {
 		super(driveTrain);
-		this.angle = angle.getValue();
+		this.smartAngle = smartAngle;
+	}
+	
+	public Turn(SmartValue smartAngle, DriveTrain driveTrain, SmartValue smartTime) {
+		super(driveTrain);
+		this.smartAngle = smartAngle;
+		this.smartTime = smartTime;
 	}
 	
 	protected void initialize() {
 		super.initialize();
+		if (smartAngle != null) angle = smartAngle.getDouble();
 		revolutions = toRevolutionsFromDegrees(angle);
-		System.out.println("STARTING COMMAND TURN ANGLE: " + angle + " REVS: "+ revolutions);
+		System.out.println("STARTING COMMAND TURN ANGLE: " + angle + " REVS: "+ revolutions + " TIMEOUT: " + getTimeOut());
 	}
 	
 	protected void execute() {
 		leftMaster.set(revolutions);
 		leftSlave.set(leftMaster.getDeviceID());
+		
 		rightMaster.set(revolutions);
 		rightSlave.set(rightMaster.getDeviceID());
 		
@@ -44,5 +51,10 @@ public class Turn extends EncoderDriveCommand {
 		double circumferenceFraction = angle / 360.0;
 		double circumference = Math.PI * 23.5;
 		return toRevolutions(circumferenceFraction * circumference);
+	}
+	
+	protected double getTimeOut() {
+		if (smartTime != null) return smartTime.getDouble(); 
+		else return super.getTimeOut();
 	}
 } 
